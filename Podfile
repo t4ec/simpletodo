@@ -5,6 +5,7 @@ target "simpletodotest" do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'RealmSwift'
+    pod 'Eureka'
 end
 
 post_install do |installer|

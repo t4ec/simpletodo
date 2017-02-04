@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Eureka.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +52,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13DCF70AE06929A64DD67A67741B5D0C</key>
+		<key>21078D214EEC456590855727C0C0818C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A369E734193E9CBFBB7345EF79C093A</key>
+		<key>83EFEC73E3705471C3313FDEC3DEE5B7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A56F2298E92FFFD6904609B109BE5DC2</key>
+		<key>B7BD17B967DB974C0D39B841C7725518</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBACB795A5308A6D2748A2A958B67440</key>
 		<dict>
 			<key>primary</key>
 			<true/>

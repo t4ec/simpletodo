@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,7 +31,7 @@
             </objects>
             <point key="canvasLocation" x="36" y="139"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Todo Lists-->
         <scene sceneID="6Hb-9Z-jkE">
             <objects>
                 <tableViewController id="rA2-g3-Swa" sceneMemberID="viewController">
@@ -38,13 +39,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="wTh-BP-81J">
+                            <rect key="frame" x="0.0" y="72" width="375" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xie-ol-iFw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="xie-ol-iFw">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xie-ol-iFw" id="jOX-no-dw1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="xie-ol-iFw" id="jOX-no-dw1">
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgm-vm-vUo">
+                                            <rect key="frame" x="15" y="11" width="285" height="22"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Rgm-vm-vUo" firstAttribute="top" secondItem="jOX-no-dw1" secondAttribute="topMargin" id="87u-B8-Q3Y"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Rgm-vm-vUo" secondAttribute="trailing" id="ciU-eF-wMQ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Rgm-vm-vUo" secondAttribute="bottom" id="kmL-CW-e4z"/>
+                                        <constraint firstItem="Rgm-vm-vUo" firstAttribute="leading" secondItem="jOX-no-dw1" secondAttribute="leadingMargin" id="knO-cR-5pK"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -53,11 +73,13 @@
                             <outlet property="delegate" destination="rA2-g3-Swa" id="t2b-ds-iAO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zfo-v7-LAW"/>
+                    <navigationItem key="navigationItem" title="Todo Lists" id="zfo-v7-LAW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jib-2o-cAI"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqA-wS-VhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729" y="139"/>
+            <point key="canvasLocation" x="1728.8" y="138.98050974512745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IXq-Kv-2Ca">
