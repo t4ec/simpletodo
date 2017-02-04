@@ -79,6 +79,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Todo Lists" id="zfo-v7-LAW">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="JxE-xz-UlB">
+                            <connections>
+                                <action selector="logout:" destination="rA2-g3-Swa" id="JEM-qh-Z72"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jib-2o-cAI">
                             <connections>
                                 <action selector="addList:" destination="rA2-g3-Swa" id="AyJ-qn-vcr"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import FBSDKLoginKit
 
 class TodoListTableViewController: UITableViewController {
     
@@ -27,6 +28,23 @@ class TodoListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        let loginViewController = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Login")
+        loginViewController.modalPresentationStyle = .fullScreen
+        present(loginViewController, animated: true, completion: { [unowned self] in
+            // Remove items including images
+            for list in self.todoLists {
+                list.removeAllItems()
+            }
+            try! self.realm.write {
+                self.realm.deleteAll()
+            }
+        })
+    }
+
     @IBAction func addList(_ sender: UIBarButtonItem) {
         let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List") as! UINavigationController
         addListVC.modalPresentationStyle = .currentContext

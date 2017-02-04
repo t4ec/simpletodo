@@ -19,8 +19,23 @@ class LoginViewController: UIViewController {
         } else {
             let loginButton = LoginButton(readPermissions: [ .publicProfile ])
             loginButton.center = view.center
+            loginButton.delegate = self
             view.addSubview(loginButton)
         }
+    }
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        switch result {
+        case .success:
+            performSegue(withIdentifier: "Log in", sender: self)
+        default: return
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        return
     }
 }
 
