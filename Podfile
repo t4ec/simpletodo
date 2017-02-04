@@ -6,6 +6,8 @@ target "simpletodotest" do
     pod 'FacebookLogin'
     pod 'RealmSwift'
     pod 'Eureka', '~> 2.0.0-beta.1'
+    pod 'MGSwipeTableCell'
+    pod 'Hue'
 end
 
 post_install do |installer|

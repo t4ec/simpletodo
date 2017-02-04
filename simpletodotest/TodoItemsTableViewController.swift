@@ -57,6 +57,9 @@ extension TodoItemsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Todo Item Cell", for: indexPath) as! TodoItemTableViewCell
         let todoItem = todoItems[indexPath.row]
         cell.title.text = todoItem.name
+        cell.finished = todoItem.finished
+        cell.indexPath = indexPath
+        cell.itemDelegate = self
         return cell
     }
 }
@@ -93,5 +96,17 @@ extension TodoItemsTableViewController {
         present(addListVC, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - TodoItemTableViewCellDelegate
+extension TodoItemsTableViewController: TodoItemTableViewCellDelegate {
+    func changeItemStatus(for indexPath: IndexPath, finished: Bool) {
+        let item = todoItems[indexPath.row]
+        try! realm.write {
+            item.finished = finished
+        }
+        // Reload cell to update button text
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }

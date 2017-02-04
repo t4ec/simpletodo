@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Hue.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MGSwipeTableCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-simpletodotest.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,7 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>21078D214EEC456590855727C0C0818C</key>
+		<key>1CD80321715FDB12A3A31B7BCB09EA28</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2675B24B30EF9BA251BC717094EE3974</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +92,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83EFEC73E3705471C3313FDEC3DEE5B7</key>
+		<key>AEEC2530A5F5BE2A9BCDC6AE0180AB58</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7BD17B967DB974C0D39B841C7725518</key>
+		<key>B2542602E50EDF091ADB18B4688DF34F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DA2C227A84DD159391DE6B39903E54E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
