@@ -28,8 +28,9 @@ class TodoListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     @IBAction func addList(_ sender: UIBarButtonItem) {
-        let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List")
+        let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List") as! UINavigationController
         addListVC.modalPresentationStyle = .currentContext
+
         present(addListVC, animated: true, completion: nil)
     }
 }
@@ -49,5 +50,39 @@ extension TodoListTableViewController {
         let todoList = todoLists[indexPath.row]
         cell.title.text = todoList.name
         return cell
+    }
+}
+
+// MARK: - Table view delegate
+extension TodoListTableViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+
+        let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List") as! UINavigationController
+        
+        // Set "adding" flag on top view controller
+        let topVC = addListVC.topViewController as! AddEditListViewController
+        topVC.todoList = todoLists[indexPath.row]
+        addListVC.modalPresentationStyle = .currentContext
+        
+        present(addListVC, animated: true, completion: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            try! realm.write {
+                realm.delete(todoLists[indexPath.row])
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            tableView.endUpdates()
+        }
     }
 }

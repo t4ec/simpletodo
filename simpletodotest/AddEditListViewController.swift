@@ -7,22 +7,50 @@
 //
 
 import UIKit
+import Eureka
+import RealmSwift
 
-class AddEditListViewController: UIViewController {
-    @IBOutlet weak var customNavigationItem: UINavigationItem!
-    var addingList = false
+class AddEditListViewController: FormViewController {
+
+    let realm = try! Realm()
+    
+    // If we have it - we are editing, otherwise - creating new list
+    var todoList: TodoList?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if addingList {
-            customNavigationItem.title = "Add list"
+        // Initialize form, add Name row
+        form = Form()
+        form +++ Section() <<< TextRow("Name") {
+            $0.placeholder = "List name"
+        }
+
+        if let list = todoList {
+            navigationItem.title = "Edit list"
+            let nameRow = form.rowBy(tag: "Name") as! TextRow
+            nameRow.value = list.name
         } else {
-            customNavigationItem.title = "Edit list"
+            navigationItem.title = "Add list"
         }
     }
 
     @IBAction func save(_ sender: UIBarButtonItem) {
+        var newName = (form.rowBy(tag: "Name") as! TextRow).value
+        
+        // We do not want empty names for lists
+        if newName == nil || newName?.characters.count == 0 {
+            newName = "No name"
+        }
+        
+        try! realm.write {
+            if let list = todoList {
+                list.name = newName!
+            } else {
+                todoList = TodoList(value: ["name": newName!])
+                realm.add(todoList!)
+            }
+        }
         dismiss(animated: true, completion: nil)
     }
 

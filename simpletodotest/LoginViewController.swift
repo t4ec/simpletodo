@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let accessToken = AccessToken.current {
+        if let _ = AccessToken.current {
             // nothing
         } else {
             let loginButton = LoginButton(readPermissions: [ .publicProfile ])
