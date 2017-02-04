@@ -9,6 +9,7 @@
 import UIKit
 import Eureka
 import RealmSwift
+import SKPhotoBrowser
 
 class AddEditItemViewController: FormViewController {
     
@@ -44,8 +45,15 @@ class AddEditItemViewController: FormViewController {
                         cell.itemImageView.image = image
                     }
                 }
-            }).onCellSelection({cell, row in
-                
+            }).onCellSelection({ [unowned self] cell, row in
+                if let imageName = self.todoItem?.image {
+                    let imagePath = FileManager.pathToFileInDocumentsDirectory(imageName)
+                    let image = SKPhoto.photoWithImageURL(imagePath.relativeString)
+                    let browser = SKPhotoBrowser(photos: [image])
+                    browser.initializePageIndex(0)
+                    self.present(browser, animated: true, completion: {})
+                }
+                row.deselect()
             })
 
             <<< ButtonRow("Add Image") {

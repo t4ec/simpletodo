@@ -8,6 +8,7 @@ target "simpletodotest" do
     pod 'Eureka', '~> 2.0.0-beta.1'
     pod 'MGSwipeTableCell'
     pod 'Hue'
+    pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
 end
 
 post_install do |installer|

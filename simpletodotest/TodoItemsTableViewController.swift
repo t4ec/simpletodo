@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SKPhotoBrowser
 
 class TodoItemsTableViewController: UITableViewController {
 
@@ -41,6 +42,21 @@ class TodoItemsTableViewController: UITableViewController {
         
         present(addListVC, animated: true, completion: nil)
     }
+
+    @IBAction func showGallery(_ sender: UIBarButtonItem) {
+        let imageItems = realm.objects(TodoItem.self).filter("image != nil AND %@ IN lists", todoList!)
+        if imageItems.count > 0 {
+            var photos: [SKPhoto] = []
+            for item in imageItems {
+                let path = FileManager.pathToFileInDocumentsDirectory(item.image!)
+                photos.append(SKPhoto.photoWithImageURL(path.relativeString))
+            }
+            let browser = SKPhotoBrowser(photos: photos)
+            browser.initializePageIndex(0)
+            present(browser, animated: true, completion: {})
+        }
+    }
+
 }
 
 // MARK: - Table view data source

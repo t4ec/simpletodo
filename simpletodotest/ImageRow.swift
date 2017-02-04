@@ -15,7 +15,7 @@ final class ImageRow: Row<ImageCell>, RowType {
         cellProvider = CellProvider<ImageCell>(nibName: "ImageCell")
     }
     
-    override func didSelect() {
-        deselect()
-    }
+//    override func didSelect() {
+//        deselect()
+//    }
 }
