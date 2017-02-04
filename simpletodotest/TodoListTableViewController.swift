@@ -63,11 +63,14 @@ extension TodoListTableViewController {
         return UITableViewAutomaticDimension
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 
         let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List") as! UINavigationController
         
-        // Set "adding" flag on top view controller
         let topVC = addListVC.topViewController as! AddEditListViewController
         topVC.todoList = todoLists[indexPath.row]
         addListVC.modalPresentationStyle = .currentContext
@@ -79,10 +82,31 @@ extension TodoListTableViewController {
         if editingStyle == .delete {
             tableView.beginUpdates()
             try! realm.write {
+                // Delete all nested items & list itself
+                realm.delete(todoLists[indexPath.row].items)
                 realm.delete(todoLists[indexPath.row])
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             tableView.endUpdates()
+        }
+    }
+}
+
+// MARL: - Handle segues
+extension TodoListTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case "Show Todo List Items":
+            if let dvc = destination as? TodoItemsTableViewController {
+                guard let todoListIndexPath = tableView.indexPathForSelectedRow else { return }
+                let todoList = todoLists[todoListIndexPath.row]
+                dvc.todoList = todoList
+            }
+        default:
+            return
         }
     }
 }

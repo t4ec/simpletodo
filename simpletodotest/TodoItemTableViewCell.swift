@@ -1,5 +1,5 @@
 //
-//  TodoListTableViewCell.swift
+//  TodoItemTableViewCell.swift
 //  simpletodotest
 //
 //  Created by Dmytrii Sinko on 04.02.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoListTableViewCell: UITableViewCell {
+class TodoItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
 

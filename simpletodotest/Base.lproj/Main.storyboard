@@ -68,6 +68,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="title" destination="Rgm-vm-vUo" id="AmI-71-HFF"/>
+                                    <segue destination="rhJ-sO-nG2" kind="show" identifier="Show Todo List Items" id="zm5-7A-svA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,6 +88,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqA-wS-VhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1694" y="139"/>
+        </scene>
+        <!--Items-->
+        <scene sceneID="Q0r-Zs-GA8">
+            <objects>
+                <tableViewController id="rhJ-sO-nG2" customClass="TodoItemsTableViewController" customModule="simpletodotest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fx7-JE-Vfy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="aDz-5K-b2V">
+                            <rect key="frame" x="0.0" y="72" width="375" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Todo Item Cell" id="5TC-BZ-cQQ" customClass="TodoItemTableViewCell" customModule="simpletodotest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="5TC-BZ-cQQ" id="TJA-Ep-uyR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCe-Hg-nKw">
+                                            <rect key="frame" x="15" y="11" width="345" height="22"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="NCe-Hg-nKw" secondAttribute="trailing" id="4Ge-no-Zjl"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="NCe-Hg-nKw" secondAttribute="bottom" id="Afx-nj-w9n"/>
+                                        <constraint firstItem="NCe-Hg-nKw" firstAttribute="leading" secondItem="TJA-Ep-uyR" secondAttribute="leadingMargin" id="E3s-oh-LXf"/>
+                                        <constraint firstItem="NCe-Hg-nKw" firstAttribute="top" secondItem="TJA-Ep-uyR" secondAttribute="topMargin" id="SRa-Fv-4Ll"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="title" destination="NCe-Hg-nKw" id="9ss-yW-utP"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rhJ-sO-nG2" id="WEt-cq-1Mi"/>
+                            <outlet property="delegate" destination="rhJ-sO-nG2" id="U3L-zX-O8g"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Items" id="Mk8-PV-1iG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="esf-97-b21">
+                            <connections>
+                                <action selector="addItem:" destination="rhJ-sO-nG2" id="ejl-24-NeM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6KQ-jy-bYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2632.8000000000002" y="138.98050974512745"/>
+        </scene>
+        <!--Add Edit Item View Controller-->
+        <scene sceneID="mhy-Bn-44D">
+            <objects>
+                <viewController id="Dkm-LK-fjj" customClass="AddEditItemViewController" customModule="simpletodotest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cmm-i3-ufO"/>
+                        <viewControllerLayoutGuide type="bottom" id="xMj-tI-fWT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qrD-5Z-xwJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CbY-B4-YzD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TeE-Qe-4wl">
+                            <connections>
+                                <action selector="cancel:" destination="Dkm-LK-fjj" id="ajg-1Y-r57"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gUI-ay-kdR">
+                            <connections>
+                                <action selector="save:" destination="Dkm-LK-fjj" id="A59-6U-sUP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbc-IU-fpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3572" y="895.50224887556226"/>
         </scene>
         <!--Add Edit List View Controller-->
         <scene sceneID="z4G-rl-jhm">
@@ -153,6 +241,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WR9-8m-OgX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1693.5999999999999" y="-566.26686656671666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ibj-li-ReE">
+            <objects>
+                <navigationController storyboardIdentifier="Add Edit Item" automaticallyAdjustsScrollViewInsets="NO" id="sFW-Lg-M8K" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Ig-bE-pkW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dkm-LK-fjj" kind="relationship" relationship="rootViewController" id="5h5-r5-2G2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mc8-cs-KSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2632.8000000000002" y="895.50224887556226"/>
         </scene>
     </scenes>
 </document>
