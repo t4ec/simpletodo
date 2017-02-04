@@ -7,13 +7,15 @@
 //
 
 import UIKit
-import Realm
+import RealmSwift
 
 class TodoListTableViewController: UITableViewController {
     
-    var todoLists: RLMArray {
+    let realm = try! Realm()
+    
+    var todoLists: Results<TodoList> {
         get {
-            return TodoList.allObjects()
+            return self.realm.objects(TodoList.self)
         }
     }
 
@@ -25,6 +27,11 @@ class TodoListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    @IBAction func addList(_ sender: UIBarButtonItem) {
+        let addListVC = (UIApplication.shared.delegate as! AppDelegate).storyboard!.instantiateViewController(withIdentifier: "Add Edit List")
+        addListVC.modalPresentationStyle = .currentContext
+        present(addListVC, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Table view data source
@@ -34,12 +41,13 @@ extension TodoListTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(todoLists.count())
+        return Int(todoLists.count)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Todo List Cell", for: indexPath) as! TodoListTableViewCell
-        let todoList = todoLists.objectAtIndex(indexPath.row["name"]) as TodoList
-        cell.title = todoList.name
+        let todoList = todoLists[indexPath.row]
+        cell.title.text = todoList.name
+        return cell
     }
 }

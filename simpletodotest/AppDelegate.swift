@@ -14,20 +14,20 @@ import FacebookCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let success = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let _ = AccessToken.current {
-            let mainViewController = storyboard.instantiateViewController(withIdentifier: "Main")
+            let mainViewController = storyboard!.instantiateViewController(withIdentifier: "Main")
             window?.rootViewController = mainViewController
             window?.makeKeyAndVisible()
         } else {
-            let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
+            let loginViewController = storyboard!.instantiateViewController(withIdentifier: "Login")
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
         }

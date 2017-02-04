@@ -6,9 +6,9 @@
 //  Copyright © 2017 Dmytrii Sinko. All rights reserved.
 //
 
-import Realm
+import RealmSwift
 
-class TodoItem: RLMObject {
+class TodoItem: Object {
     dynamic var name = ""
     dynamic var finished = false
     
