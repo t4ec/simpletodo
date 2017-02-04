@@ -23,9 +23,74 @@ class AddEditItemViewController: FormViewController {
         
         // Initialize form, add Name row
         form = Form()
-        form +++ Section() <<< TextRow("Name") {
-            $0.placeholder = "Item name"
-        }
+        form
+            +++ Section()
+            <<< TextRow("Name") {
+                $0.placeholder = "Item name"
+            }
+            +++ Section()
+            <<< ImageRow("Image") {
+                $0.hidden = Condition.function([], { [unowned self] form in
+                    if let _ = self.todoItem?.image {
+                        return false
+                    }
+                    return true
+                })
+            }.cellUpdate({ cell, row in
+                cell.height = {return UITableViewAutomaticDimension }
+                if let imageName = self.todoItem?.image {
+                    if let image = FileManager.getImageFromDocumentsDirectory(imageName) {
+                        row.value = image
+                        cell.itemImageView.image = image
+                    }
+                }
+            }).onCellSelection({cell, row in
+                
+            })
+
+            <<< ButtonRow("Add Image") {
+                $0.title = "Add Image"
+                $0.hidden = Condition.function([], { [unowned self] form in
+                    if self.todoItem == nil || self.todoItem?.image != nil {
+                        return true
+                    }
+                    return false
+                })
+            }.onCellSelection({ [unowned self] cell, row in
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = false
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            
+            <<< ButtonRow("Change Image") {
+                $0.title = "Change Image"
+                $0.hidden = Condition.function([], { [unowned self] form in
+                    if let _ = self.todoItem?.image {
+                        return false
+                    }
+                    return true
+                })
+            }.onCellSelection({ cell, row in
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.allowsEditing = false
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+        
+            <<< ButtonRow("Remove Image") {
+                $0.title = "Remove Image"
+                $0.hidden = Condition.function([], { [unowned self] form in
+                    if let _ = self.todoItem?.image {
+                        return false
+                    }
+                    return true
+                })
+            }.onCellSelection({ [unowned self] cell, row in
+                self.removeImage()
+            })
         
         if let list = todoItem {
             navigationItem.title = "Edit item"
@@ -58,5 +123,42 @@ class AddEditItemViewController: FormViewController {
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension AddEditItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        // Remove previously picked image
+        removeImage()
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let imageName = UUID().uuidString
+
+        // Save image to DB only if saving file succeeded
+        if let _ = FileManager.saveImageToDocumentsDirectory(imageName, image: image) {
+            try! realm.write {
+                todoItem!.image = imageName
+            }
+        }
+        dismiss(animated: true, completion: nil)
+        updateHiddenRows()
+    }
+    
+    fileprivate func updateHiddenRows() {
+        for row in form.allRows {
+            row.evaluateHidden()
+        }
+    }
+    
+    fileprivate func removeImage() {
+        if let image = todoItem?.image {
+            FileManager.removeImageFromDocumentsDirectory(image)
+            try! realm.write {
+                todoItem!.image = nil
+            }
+        }
+        updateHiddenRows()
     }
 }

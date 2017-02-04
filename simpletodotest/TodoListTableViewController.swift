@@ -81,9 +81,9 @@ extension TodoListTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
+            // Delete all nested items & list itself
+            todoLists[indexPath.row].removeAllItems()
             try! realm.write {
-                // Delete all nested items & list itself
-                realm.delete(todoLists[indexPath.row].items)
                 realm.delete(todoLists[indexPath.row])
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
